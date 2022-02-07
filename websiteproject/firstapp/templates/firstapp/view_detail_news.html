@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{news.title}} :: {{ block.super }}
+{% endblock %}
+{% block sidebar %}
+
+            <div class="list-group">
+            {% include 'inc/_sidebar.html' %}
+            </div>
+
+{% endblock %}
+{% block content %}
+
+                <div class="card mb-3">
+                  <div class="card-header">
+                      Категория: <a href="{{ news_item.category.get_absolute_url }}">{{ news.category}}</a>
+                  </div>
+                  <div class="card-body">
+                      <div class="media">
+                          <div class="media-body">
+                              {% if news_item.photo %}
+                                    <img src="{{ news_item.photo.url }}" width="300">
+                              {% else %}
+                              <img src="https://image.winudf.com/v2/image/Y29tLnNydC50cmFja2Rpc3RyaWJ1dGlvbmFwcF9zY3JlZW5fMV9tOHJndTQyMw/screen-1.jpg?h=710&fakeurl=1&type=.jpg" width="300">
+                              {% endif%}
+                              <h5 class="card-title {% cycle 'text-success' 'text-danger' %}">{{news_item.title}}</h5>
+                            <p class="card-text"> {{news_item.content|linebreaksbr}}</p>
+
+                              </div>
+                          </div>
+                  </div>
+                  <div class="card-footer text-muted">
+                    {{news_item.created_at|date:"Y:m-d H:i:s"}}
+                  </div>
+                </div>
+
+
+{% endblock  %}
+
+
