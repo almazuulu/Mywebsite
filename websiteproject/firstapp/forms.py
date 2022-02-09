@@ -11,6 +11,8 @@ class NewsForm(forms.ModelForm):
             'title': forms.TextInput(attrs={"class": "form-control"}),
             'content': forms.Textarea(attrs={"class": "form-control", "rows": 20}),
             'category': forms.Select(attrs={"class": "form-control"}),
+            'car_brand': forms.Select(attrs={"class": "form-control"}),
+            'photo': forms.FileInput(attrs={"class": "form-control"}),
         }
 
 
