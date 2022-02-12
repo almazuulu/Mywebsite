@@ -1,0 +1,19 @@
+#header{
+    background: #80d8ff;
+    color: #fff;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited
+{
+    color: #19865C;
+}
+
+caption
+{
+    background: yellow;
+}
+
+div.breadcrumbs{
+    background: #26a69a;
+}
+
