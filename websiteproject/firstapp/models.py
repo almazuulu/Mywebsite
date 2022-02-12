@@ -3,13 +3,13 @@ from django.urls import reverse
 
 
 class News(models.Model):
-    title = models.CharField(max_length=128, verbose_name='Наименование')
-    content = models.TextField(blank=True, verbose_name='Содержимое')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
-    update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+    title = models.CharField(max_length=128, verbose_name='Заголовок')
+    content = models.TextField(blank=True, verbose_name='Контент')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория', null=True)
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория', null = True)
     views = models.IntegerField(default=0)
 
     def get_absolute_url(self):
@@ -30,7 +30,7 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={"category_id": self.pk})
 
-    def __str__(self): # за счет этого видим отображение названий категорий на странице, а не category_1, etc..
+    def __str__(self):
         return self.title
 
     class Meta:
