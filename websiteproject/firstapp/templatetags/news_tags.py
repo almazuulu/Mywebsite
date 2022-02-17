@@ -7,10 +7,13 @@ register = template.Library()
 
 @register.simple_tag()
 def find_category():
+    allCategories = Category.objects.all()
     categories = Category.objects.annotate(cnt=Count('news')).filter(cnt__gt=0)
-    return Category.objects.all()
+    return categories
 
-
-@register.simple_tag()
+@register.inclusion_tag('firstapp/list_categories.html')
 def show_categories():
-    categories = Category.objects.annotate(cnt = Count('news')).filter(cnt__gt=0)
+    categories = Category.objects.all()
+
+    return {"categories":categories}
+    

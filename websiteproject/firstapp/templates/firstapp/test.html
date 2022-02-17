@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    Тестовая страница
+
+{% endblock %}
+{% block sidebar %}
+
+            <div class="list-group">
+            {% include 'inc/_sidebar.html' %}
+            </div>
+
+{% endblock %}
+{% block content %}
+
+    {% for name in page_obj.object_list %}
+
+        {{ name }}
+    {% endfor %}
+
+{% endblock  %}
+
+
