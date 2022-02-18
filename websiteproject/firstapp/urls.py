@@ -4,6 +4,8 @@ from .views import *
 #www.address.com/news/
 urlpatterns = [
     #path('',index, name = 'home'),
+    path('register/', register, name = 'register'),
+    path('login/', login, name = 'login'),
     path('test/', test, name = 'test'),
     path('',HomeNews.as_view(), name = 'home'),
     path('about/', about, name = 'about'),
