@@ -18,7 +18,7 @@
             {% block sidebar %}SIDEBAR{% endblock %}
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'error'%}
@@ -27,19 +27,21 @@
                         </div>
                     {% else %}
                             <div class="alert alert-{{ message.tags }}" role="success">
+                                {{ message }}
                             </div>
                     {% endif %}
 
                     </div>
                 {% endfor %}
             {% endif %}
+        {% block content %} CONTENT {% endblock %}
         </div>
 
-        <div class="col-md-8">
-        {% block content %} CONTENT {% endblock %}
 
+
+            {% if page_obj.has_other_pages %}
             <nav aria-label="...">
-              <ul class="pagination">
+              <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
                     <li class="page-item">
 
@@ -71,8 +73,8 @@
                   {% endif %}
               </ul>
             </nav>
-
-        </div>
+        {% endif %}
+    </div>
     </div>
 </div>
 

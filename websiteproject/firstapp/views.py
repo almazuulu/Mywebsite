@@ -7,7 +7,9 @@ from django.urls import reverse_lazy
 from .utils import MyMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.contrib.auth.forms import UserCreationForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
+from  django.contrib.auth import login, logout
+from django.core.mail import send_mail
 
 from .models import *
 from .forms import *
@@ -15,30 +17,54 @@ from .forms import *
 
 def register(request):
     if request.method =='POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             messages.success(request, 'Вы успешно зарегистрировались!')
             return redirect('login')
         else:
             messages.error(request, 'Ошибка регистрации%%!')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
 
     return render(request, 'firstapp/register.html', {"form":form})
 
 
-def login(request):
-    return render(request, 'firstapp/login.html')
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data = request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserLoginForm()
+    return render(request, 'firstapp/login.html', {"form":form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
 def test(request):
-    objects = ['john1', 'paul2', 'george3', 'ringo4', 'john5', 'paul6', 'george7', 'ringo8']
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'],
+                      'test@gmail.com',['almazuulu@gmail.com'], fail_silently = False )
 
-    paginator = Paginator(objects, 2)
-    page_num = request.GET.get('page', 1)
-    page_objects = paginator.get_page(page_num)
+            if mail:
+                messages.success(request, 'Письмо отправлено!')
+            else:
+                messages.error(request, 'Ошибка отправки почты!')
 
-    return render(request, 'firstapp/test.html', {'page_obj':page_objects})
+        else:
+            messages.error(request, 'Ошибка регистрации%%!')
+    else:
+        form = ContactForm()
+
+    return render(request, 'firstapp/test.html',{"form":form})
 
 class HomeNews(MyMixin, ListView):
     model = News

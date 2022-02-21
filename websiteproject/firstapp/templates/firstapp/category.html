@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="col-md-8">
-            {% for i in news%}
+            {% for i in news %}
                 <div class="card mb-3">
                   <div class="card-header">
                       Категория: <a href="{% url 'category' i.category.pk%}">{{i.category}}</a>

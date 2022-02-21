@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    Тестовая страница
-
+    Отправка письма
 {% endblock %}
 {% block sidebar %}
 
@@ -12,11 +11,13 @@
 {% endblock %}
 {% block content %}
 
-    {% for name in page_obj.object_list %}
+<h1> Обратная связь  </h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p  }}
 
-        {{ name }}
-    {% endfor %}
-
+    <button type="submit" class="btn btn-primary btn-block">Отправить письмо!</button>
+</form>
 {% endblock  %}
 
 

@@ -18,7 +18,11 @@
       {% endif %}
       </ul>
       <span class="navbar-text">
+        {% if request.user.is_authenticated %}
+        Добро пожаловать, {{ user.username }} | <a href="{% url 'logout' %}"> Выход </a>
+        {% else %}
         <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}"> Авторизация</a>
+        {% endif %}
       </span>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
