@@ -52,7 +52,7 @@ def test(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'],
-                      'test@gmail.com',['almazuulu@gmail.com'], fail_silently = False )
+                      'djangobekov2022@gmail.com',['aman.arykbaev@gmail.com'], fail_silently = False )
 
             if mail:
                 messages.success(request, 'Письмо отправлено!')
@@ -60,7 +60,7 @@ def test(request):
                 messages.error(request, 'Ошибка отправки почты!')
 
         else:
-            messages.error(request, 'Ошибка регистрации%%!')
+            messages.error(request, 'Ошибка Catpch-и!')
     else:
         form = ContactForm()
 
