@@ -141,12 +141,12 @@ INTERNAL_IPS = ["127.0.0.1",]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'djangobekov2022@gmail.com'
-EMAIL_HOST_PASSWORD = 'Dj@ngo$2022@'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+# EMAIL_HOST = ''
+# EMAIL_PORT = 
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = True
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
